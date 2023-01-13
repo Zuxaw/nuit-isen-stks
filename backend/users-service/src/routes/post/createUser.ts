@@ -6,11 +6,11 @@ const router = express.Router();
 
 router.post('/api/user/create', async (req: Request, res: Response) => {
   console.log(getTime() + 'POST: User creation');
-  const { username, uid, profilePicture, email } = req.body;
+  const { uid, name, surname, email, phoneNumber, role } = req.body;
 
-  if (!email || !uid) {
-    console.log(getTime() + 'Please specify the email or the uid');
-    return res.status(400).send('Please specify the email or the uid');
+  if (!email || !uid || !role) {
+    console.log(getTime() + 'Please specify the email, the role or the uid');
+    return res.status(400).send('Please specify the email, the role or the uid');
   }
 
   //check if user already exists
@@ -18,11 +18,12 @@ router.post('/api/user/create', async (req: Request, res: Response) => {
   let user = await User.findOneAndUpdate(
     { email },
     {
-      username,
       uid,
-      profilePicture,
+      name,
+      surname,
       email,
-      createdAt: new Date().toString(),
+      phoneNumber,
+      role,
     },
     {
       upsert: true,
@@ -32,14 +33,15 @@ router.post('/api/user/create', async (req: Request, res: Response) => {
 
   if (!user) {
     const userCreated = User.build({
-      username,
       uid,
-      profilePicture,
+      name,
+      surname,
       email,
-      createdAt: new Date().toString(),
+      phoneNumber,
+      role,
     });
     await userCreated.save();
-    console.log(getTime() + 'POST: User is created');
+    console.log(getTime() + 'POST: User is updated');
     res.status(201).send(userCreated);
   }
 

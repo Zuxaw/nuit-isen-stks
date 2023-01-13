@@ -7,17 +7,19 @@ export const userType: GraphQLObjectType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLString },
     uid: { type: GraphQLString },
-    username: { type: GraphQLString },
+    name: { type: GraphQLString },
+    surname: { type: GraphQLString },
     email: { type: GraphQLString },
-    profilePicture: { type: GraphQLString },
-    posts: {
-      type: new GraphQLList(postType),
-      async resolve(parent, args) {
-        const posts = await axios.get(
-          (process.env.POST_URI || 'http://localhost:4011') + '/api/posts/?user=' + parent._id
-        );
-        return posts.data;
-      },
-    },
+    phoneNumber: { type: GraphQLString },
+    role: { type: GraphQLString },
+    // posts: {
+    //   type: new GraphQLList(postType),
+    //   async resolve(parent, args) {
+    //     const posts = await axios.get(
+    //       (process.env.POST_URI || 'http://localhost:4011') + '/api/posts/?user=' + parent._id
+    //     );
+    //     return posts.data;
+    //   },
+    // },
   }),
 });
