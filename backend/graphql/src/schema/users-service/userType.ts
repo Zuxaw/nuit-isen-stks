@@ -1,6 +1,4 @@
-import axios from 'axios';
 import { GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql';
-import { postType } from '../posts-service/postType';
 
 export const userType: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
