@@ -1,55 +1,43 @@
 import { useState } from 'react';
 
+const Book = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-const Post = () => {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
-  const handleImageClick = () => {
-    setIsPopoverOpen(!isPopoverOpen);
-  };
   return (
-    <>
-      {posts.map((post,index) => (
-        <div key={index} className="card card-compact w-full mt-5 bg-base-100 shadow-xl border border-base-300">
-          <div className="card-body ">
-            <p className="prose">{post.content}</p>
-            {post.images && post.images.length > 0 && (
-              <div className="mt-4 flex flex-wrap items-center justify-center">
-                {post.images && post.images.length > 0 && (
-                  <div className="flex flex-wrap items-center justify-center mt-4">
-                    {post.images.map((image, index) => (
-                      <img
-                        key={index}
-                        src={image}
-                        className="h-52 w-64 rounded-lg m-1"
-                        onClick={handleImageClick}
-                        style={{ objectFit: 'cover' }}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div className="card-actions justify-end">
-              <button className="text-base mr-4">
-                <i className="fas fa-heart mr-2" />
-                {post.likes}
-              </button>
-              <button className="text-base mr-4">
-                <i className="fa-solid fa-share mr-2"></i>
-                {post.shares}
-              </button>
-              <button className="text-base mr-4">
-                <i className="fa-solid fa-comment mr-2"></i>
-                {post.comments}
-              </button>
+    <div className="card card-compact w-full mt-5 bg-base-100 shadow-xl border border-base-300">
+      <div className="card-body h-96">
+        {/* select date */}
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Select Date</span>
+          </label>
+          <div className="flex flex-row bg-red-500">
+            <input type="date" className="input input-bordered mr-2" placeholder="Select Date" />
+            <input type="date" className="input input-bordered" placeholder="Select Date" />
+            <div className="dropdown">
+              <label tabIndex={0} className="btn m-1">
+                Click
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li>
+                  <a>Item 2</a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-      ))}
-    </>
+      </div>
+      <button type="button" className="btn btn-primary normal-case min-w-60 absolute -bottom-5">
+        Let's Go
+      </button>
+    </div>
   );
 };
 
-export default Post;
+export default Book;
