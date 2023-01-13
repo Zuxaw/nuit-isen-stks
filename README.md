@@ -2,7 +2,9 @@
 
 
 ## Architecture:
-![image](https://user-images.githubusercontent.com/82362374/212193602-8084fc25-3236-49b0-9285-bfc739daacd9.png)
+
+<img width="652" alt="image" src="https://user-images.githubusercontent.com/82362374/212407137-3e9023fd-7309-417c-80f9-6a79262fc65e.png">
+
 
 ## Clouds
 
