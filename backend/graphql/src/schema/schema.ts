@@ -1,17 +1,17 @@
 import axios from 'axios';
-import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
-import { postType } from './posts-service/postType';
+import { GraphQLFloat, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
+import { chamberType } from './chambers-service/chamberType';
 import { userType } from './users-service/userType';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     post: {
-      type: postType,
+      type: chamberType,
       args: { _id: { type: GraphQLString } },
       async resolve(parent, args) {
         const post = await axios.get(
-          (process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/post/?_id=' + args._id
+          (process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chamber/?_id=' + args._id
         );
         return post.data;
       },
@@ -27,9 +27,9 @@ const RootQuery = new GraphQLObjectType({
       },
     },
     posts: {
-      type: new GraphQLList(postType),
+      type: new GraphQLList(chamberType),
       async resolve(parent, args) {
-        const posts = await axios.get((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/posts');
+        const posts = await axios.get((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chambers');
         return posts.data;
       },
     },
@@ -65,26 +65,20 @@ const Mutation = new GraphQLObjectType({
       },
     },
     addPost: {
-      type: postType,
+      type: chamberType,
       args: {
-        content: { type: GraphQLString },
-        images: { type: new GraphQLList(GraphQLString) },
-        likes: { type: GraphQLInt },
-        shares: { type: GraphQLInt },
-        comments: { type: GraphQLInt },
-        createdAt: { type: GraphQLString },
-        userId: { type: GraphQLString },
+        number: { type: GraphQLInt },
+        typology: { type: GraphQLString },
+        pricing: { type: GraphQLFloat },
+        pictures: { type: new GraphQLList(GraphQLString) },
       },
       async resolve(parent, args) {
         console.log(args.userId);
-        const post = await axios.post((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/post/create', {
-          content: args.content,
-          images: args.images,
-          likes: args.likes,
-          shares: args.shares,
-          comments: args.comments,
-          createdAt: args.createdAt,
-          userId: args.userId,
+        const post = await axios.post((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chamber/create', {
+          number: args.number,
+          typology: args.typology,
+          pricing: args.pricing,
+          pictures: args.pictures,
         });
         return post.data;
       },
