@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 
 interface UserAttrs {
-  username?: string;
   uid: string;
+  name?: string;
+  surname?: string;
   email: string;
-  profilePicture?: string;
-  createdAt: string;
+  phoneNumber?: string;
+  role: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -13,30 +14,32 @@ interface UserModel extends mongoose.Model<UserDoc> {
 }
 
 interface UserDoc extends mongoose.Document {
-  username?: string;
   uid: string;
+  name?: string;
+  surname?: string;
   email: string;
-  profilePicture?: string;
-  createdAt: string;
+  phoneNumber?: string;
+  role: string;
 }
 
 const userSchema = new mongoose.Schema(
   {
-    username: String,
     uid: {
       type: String,
       required: true,
       unique: true,
     },
+    name: String,
+    surname: String,
     email: {
       type: String,
       required: true,
       unique: true,
     },
-    profilePicture: String,
-    createdAt: {
+    phoneNumber: String,
+    role: {
       type: String,
-      default: new Date().toString(),
+      required: true,
     },
   },
   { versionKey: false }
