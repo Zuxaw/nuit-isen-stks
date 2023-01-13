@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
 import { isAuth } from '~/lib/firebase';
-import DashboardHeader from '../header/DashboardHeader';
+import DashboardHeader from '../header/Header';
 import Dashboard from '../../screens/dashboard/dashboard';
 import RedirectTo from './RedirectTo';
 

@@ -18,11 +18,15 @@ const DashboardHeader = () => {
   };
 
   return (
-    <div className='sticky top-0 bg-base-100 z-50 mb-2'>
+    <div className="sticky top-0 bg-base-100 z-50 mb-2">
       <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost btn-square" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+            <label
+              tabIndex={0}
+              className="btn btn-ghost btn-square"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -30,7 +34,12 @@ const DashboardHeader = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
               </svg>
             </label>
             {isDropdownOpen && (
@@ -60,7 +69,10 @@ const DashboardHeader = () => {
             )}
           </div>
           <div className="flex-1">
-            <a className="btn btn-ghost normal-case text-xl">STKS</a>
+            <a className="btn btn-ghost normal-case text-xl">
+              Sugar Hotel 
+              <i className="ml-2 fas fa-heart text-red-500" />
+            </a>
           </div>
         </div>
         <div className="flex-none gap-2 navbar-end">
@@ -76,7 +88,7 @@ const DashboardHeader = () => {
                   {!data?.photoURL ? (
                     <Avvvatars value={data?.email || 'error'} size={40} />
                   ) : (
-                    <img src={data.photoURL} referrerPolicy="no-referrer"  />
+                    <img src={data.photoURL} referrerPolicy="no-referrer" />
                   )}
                 </div>
               ) : (

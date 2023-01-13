@@ -1,17 +1,7 @@
 import { useState } from 'react';
 
-type PostProps = {
-  id: number;
-  content: string;
-  images?: string[];
-  likes: number;
-  shares: number;
-  comments: number;
-  user: string;
-  createdAt: string;
-};
 
-const Post: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
+const Post = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const handleImageClick = () => {

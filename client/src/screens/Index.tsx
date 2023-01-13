@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import { useAuthState } from '~/components/contexts/UserContext';
 import { SignInButton } from '~/components/domain/auth/SignInButton';
 import { SignOutButton } from '~/components/domain/auth/SignOutButton';
+import DashboardHeader from '~/components/header/Header';
+import Post from '~/components/Book';
 import { Head } from '~/components/shared/Head';
 import './index.scss';
 
@@ -11,7 +13,8 @@ function Index() {
   return (
     <>
       <Head title="Home" />
-      <div className="hero min-h-screen">
+      <div className="relative min-h-screen">
+        <DashboardHeader />
         <div className="background">
           <span></span>
           <span></span>
@@ -44,6 +47,7 @@ function Index() {
               </p>
               <SignInButton />
             </div>
+            <Post />
           </div>
         </div>
       </div>
