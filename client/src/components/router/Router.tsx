@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, RouteObject, useRoutes } from "react-router-dom";
 import { isAuth } from "~/lib/firebase";
+import Payment from "~/screens/payment/Payment";
 import Rooms from "~/screens/rooms/Rooms";
 import RoomsDetail from "~/screens/rooms/RoomsDetail";
 import PersonalInfo from "../form/PersonalInfo";
@@ -69,6 +70,19 @@ const InnerRouter = () => {
         {
           index: true,
           element: <PersonalInfo />,
+        },
+        {
+          path: "*",
+          element: <Page404Screen />,
+        },
+      ],
+    },
+    {
+      path: "/payment",
+      children: [
+        {
+          index: true,
+          element: <Payment />,
         },
         {
           path: "*",
