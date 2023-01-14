@@ -35,14 +35,6 @@ build:
         manual:
           - src: "***/*.ts"
             dest: .
-    - image: us.gcr.io/nuit-isen/users
-      context: backend/users-service
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "***/*.ts"
-            dest: .
     - image: us.gcr.io/nuit-isen/chambers
       context: backend/chambers-service
       docker:
