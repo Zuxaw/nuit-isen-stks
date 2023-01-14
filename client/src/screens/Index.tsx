@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { TypeAnimation } from 'react-type-animation';
-import Header from '~/components/header/Header';
-import { Head } from '~/components/shared/Head';
-import './index.scss';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { TypeAnimation } from "react-type-animation";
+import Header from "~/components/header/Header";
+import { Head } from "~/components/shared/Head";
+import "./index.scss";
 
 function Index() {
   const [adults, setAdults] = useState(0);
@@ -11,12 +11,24 @@ function Index() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const navigate = useNavigate();
-  const [isValide, setIsValide] = useState("");
+  const [showError, setShowError] = useState(false);
+
+  const handleClick = () => {
+    if (adults > 0 && rooms > 0) {
+      goToRooms();
+    } else {
+      setShowError(true);
+    }
+  };
+  
+  setTimeout(() => {
+    setShowError(false);
+  }, 4000);
   
 
   // go to the rooms
   const goToRooms = () => {
-    navigate('/rooms', {
+    navigate("/rooms", {
       state: {
         adults,
         rooms,
@@ -27,25 +39,25 @@ function Index() {
   };
 
   const handleDateChange = (dates: Date, type: string) => {
-    if (type === 'start') {
+    if (type === "start") {
       setStartDate(dates);
-    } else if (type === 'end') {
+    } else if (type === "end") {
       setEndDate(dates);
     }
   };
 
   const addItem = (type: string) => {
-    if (type === 'adults') {
+    if (type === "adults") {
       setAdults(adults + 1);
-    } else if (type === 'rooms') {
+    } else if (type === "rooms") {
       setRooms(rooms + 1);
     }
   };
 
   const removeItem = (type: string) => {
-    if (type === 'adults' && adults > 0) {
+    if (type === "adults" && adults > 0) {
       setAdults(adults - 1);
-    } else if (type === 'rooms' && rooms > 0) {
+    } else if (type === "rooms" && rooms > 0) {
       setRooms(rooms - 1);
     }
   };
@@ -87,7 +99,7 @@ function Index() {
                 className="text-5xl text-center text-secondary"
                 cursor={true}
                 sequence={[
-                  'a rustic cell ⛓️?',
+                  "a rustic cell ⛓️?",
                   4000,
                   `a dungeon 🕸️?`,
                   4000,
@@ -118,7 +130,9 @@ function Index() {
                           type="date"
                           className="input input-bordered border border-base-300 w-full"
                           placeholder="Select Date"
-                          onChange={(e) => handleDateChange(new Date(e.target.value), 'start')}
+                          onChange={(e) =>
+                            handleDateChange(new Date(e.target.value), "start")
+                          }
                           required
                         />
                       </div>
@@ -130,7 +144,9 @@ function Index() {
                           type="date"
                           className="input input-bordered border border-base-300 w-full"
                           placeholder="Select Date"
-                          onChange={(e) => handleDateChange(new Date(e.target.value), 'end')}
+                          onChange={(e) =>
+                            handleDateChange(new Date(e.target.value), "end")
+                          }
                           required
                         />
                       </div>
@@ -141,10 +157,10 @@ function Index() {
                         className="flex justify-between items-center rounded-md border border-base-300 h-12 w-full m-1"
                       >
                         <div className="flex items-center">
-                          <i className="fa-solid fa-people-group m-5"></i>{' '}
+                          <i className="fa-solid fa-people-group m-5"></i>{" "}
                           <div className="text-left">
-                            {rooms} Room {rooms > 1 ? 's' : ''}, {adults} Adult{' '}
-                            {adults > 1 ? 's' : ''}
+                            {rooms} Room {rooms > 1 ? "s" : ""}, {adults} Adult{" "}
+                            {adults > 1 ? "s" : ""}
                           </div>
                         </div>
                         <i className="fa-solid fa-chevron-down m-5 flex-end" />
@@ -159,14 +175,14 @@ function Index() {
                             <div className="flex items-center">
                               <button
                                 className="bg-gray-300 text-gray-800 rounded-md p-1"
-                                onClick={() => removeItem('rooms')}
+                                onClick={() => removeItem("rooms")}
                               >
                                 <i className="fas fa-minus"></i>
                               </button>
                               <span className="px-2">{rooms}</span>
                               <button
                                 className="bg-gray-300 text-gray-800 rounded-md p-1"
-                                onClick={() => addItem('rooms')}
+                                onClick={() => addItem("rooms")}
                               >
                                 <i className="fas fa-plus"></i>
                               </button>
@@ -179,14 +195,14 @@ function Index() {
                             <div className="flex items-center">
                               <button
                                 className="bg-gray-300 text-gray-800 rounded-md p-1"
-                                onClick={() => removeItem('adults')}
+                                onClick={() => removeItem("adults")}
                               >
                                 <i className="fas fa-minus"></i>
                               </button>
                               <span className="px-2">{adults}</span>
                               <button
                                 className="bg-gray-300 text-gray-800 rounded-md p-1"
-                                onClick={() => addItem('adults')}
+                                onClick={() => addItem("adults")}
                               >
                                 <i className="fas fa-plus"></i>
                               </button>
@@ -196,17 +212,38 @@ function Index() {
                       </ul>
                     </div>
                   </div>
+                </div> {showError && (
+                <div className="alert alert-error m-2 shadow-lg">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="stroke-current flex-shrink-0 h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>Please fill out the fields.</span>
+                  </div>
                 </div>
+              )}
               </div>
             </div>
             <div className="-mt-5">
               <button
                 type="button"
                 className="btn btn-primary normal-case min-w-60"
-                onClick={goToRooms}
+                onClick={handleClick}
+                // onClick={(adults > 0 && rooms > 0) ? goToRooms : () => }
               >
                 Let's Go
               </button>
+             
             </div>
           </div>
         </div>
