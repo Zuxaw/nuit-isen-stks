@@ -1,19 +1,30 @@
 import axios from 'axios';
-import { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
-import { postType } from './posts-service/postType';
+import {
+  GraphQLFloat,
+  GraphQLInt,
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLString,
+} from 'graphql';
+import { bookingType } from './booking-service/bookingType';
+import { chamberType } from './chambers-service/chamberType';
 import { userType } from './users-service/userType';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    post: {
-      type: postType,
+    chamber: {
+      type: chamberType,
       args: { _id: { type: GraphQLString } },
       async resolve(parent, args) {
-        const post = await axios.get(
-          (process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/post/?_id=' + args._id
+        const chamber = await axios.get(
+          (process.env.API_CHAMBERS_URL || 'http://localhost:4011') +
+            '/api/chamber/?_id=' +
+            args._id
         );
-        return post.data;
+        return chamber.data;
       },
     },
     user: {
@@ -26,17 +37,30 @@ const RootQuery = new GraphQLObjectType({
         return user.data;
       },
     },
-    posts: {
-      type: new GraphQLList(postType),
+    chambers: {
+      type: new GraphQLList(chamberType),
       async resolve(parent, args) {
-        const posts = await axios.get((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/posts');
-        return posts.data;
+        const chambers = await axios.get(
+          (process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chambers'
+        );
+        return chambers.data;
+      },
+    },
+    bookings: {
+      type: new GraphQLList(bookingType),
+      async resolve(parent, args) {
+        const bookings = await axios.get(
+          (process.env.API_BOOKINGS_URL || 'http://localhost:4012') + '/api/bookings'
+        );
+        return bookings.data;
       },
     },
     users: {
       type: new GraphQLList(userType),
       async resolve(parent, args) {
-        const users = await axios.get((process.env.API_USERS_URL || 'http://localhost:4010') + '/api/users');
+        const users = await axios.get(
+          (process.env.API_USERS_URL || 'http://localhost:4010') + '/api/users'
+        );
         return users.data;
       },
     },
@@ -49,44 +73,84 @@ const Mutation = new GraphQLObjectType({
     addUser: {
       type: userType,
       args: {
-        username: { type: GraphQLString },
         uid: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: GraphQLString },
+        surname: { type: GraphQLString },
         email: { type: new GraphQLNonNull(GraphQLString) },
-        profilePicture: { type: GraphQLString },
+        phoneNumber: { type: GraphQLString },
+        role: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args) {
-        const user = await axios.post((process.env.API_USERS_URL || 'http://localhost:4010') + '/api/user/create', {
-          username: args.name,
-          uid: args.uid,
-          email: args.email,
-          profilePicture: args.profilePicture,
-        });
+        const user = await axios.post(
+          (process.env.API_USERS_URL || 'http://localhost:4010') + '/api/user/create',
+          {
+            uid: args.uid,
+            name: args.name,
+            surname: args.surname,
+            email: args.email,
+            phoneNumber: args.phoneNumber,
+            role: args.role,
+          }
+        );
         return user.data;
       },
     },
-    addPost: {
-      type: postType,
+    addChamber: {
+      type: chamberType,
       args: {
-        content: { type: GraphQLString },
-        images: { type: new GraphQLList(GraphQLString) },
-        likes: { type: GraphQLInt },
-        shares: { type: GraphQLInt },
-        comments: { type: GraphQLInt },
-        createdAt: { type: GraphQLString },
-        userId: { type: GraphQLString },
+        number: { type: GraphQLInt },
+        typology: { type: GraphQLString },
+        description: { type: GraphQLString },
+        pricing: { type: GraphQLFloat },
+        pictures: { type: new GraphQLList(GraphQLString) },
       },
       async resolve(parent, args) {
         console.log(args.userId);
-        const post = await axios.post((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/post/create', {
-          content: args.content,
-          images: args.images,
-          likes: args.likes,
-          shares: args.shares,
-          comments: args.comments,
-          createdAt: args.createdAt,
-          userId: args.userId,
+        const chamber = await axios.post((process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chamber/create', {
+          number: args.number,
+          typology: args.typology,
+          description: args.description,
+          pricing: args.pricing,
+          pictures: args.pictures,
         });
-        return post.data;
+        return chamber.data;
+      },
+    },
+    addBooking: {
+      type: bookingType,
+      args: {
+        startDate: { type: GraphQLString },
+        endDate: { type: GraphQLString },
+        idChamber: { type: GraphQLString },
+        countAdults: { type: GraphQLInt },
+        idInvoice: { type: GraphQLString },
+        supplements: { type: new GraphQLList(GraphQLString) },
+        idUser: { type: GraphQLString },
+        emailCustomer: { type: GraphQLString },
+        nameCustomer: { type: GraphQLString },
+        surnameCustomer: { type: GraphQLString },
+        phoneNumber: { type: GraphQLString },
+        demands: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+        const booking = await axios.post(
+          (process.env.API_BOOKINGS_URL || 'http://localhost:4012') + '/api/booking/create',
+          {
+            startDate: args.startDate,
+            endDate: args.endDate,
+            idChamber: args.idChamber,
+            countAdults: args.countAdults,
+            idInvoice: args.idInvoice,
+            supplements: args.supplements,
+            idUser: args.idUser,
+            emailCustomer: args.emailCustomer,
+            nameCustomer: args.nameCustomer,
+            surnameCustomer: args.surnameCustomer,
+            phoneNumber: args.phoneNumber,
+            demands: args.demands,
+          }
+        );
+        return booking.data;
       },
     },
   },
