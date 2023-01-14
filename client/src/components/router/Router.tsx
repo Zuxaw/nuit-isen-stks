@@ -1,8 +1,9 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, RouteObject, useRoutes } from 'react-router-dom';
-import { isAuth } from '~/lib/firebase';
-import Rooms from '~/screens/rooms/Rooms';
-import PersonalInfo from '../form/PersonalInfo';
+import { lazy, Suspense } from "react";
+import { BrowserRouter, RouteObject, useRoutes } from "react-router-dom";
+import { isAuth } from "~/lib/firebase";
+import Rooms from "~/screens/rooms/Rooms";
+import RoomsDetail from "~/screens/rooms/RoomsDetail";
+import PersonalInfo from "../form/PersonalInfo";
 
 const Loading = () => (
   <p className="p-4 w-full h-full text-center">Loading...</p>
@@ -36,11 +37,24 @@ const InnerRouter = () => {
       ],
     },
     {
-      path: '/rooms',
+      path: "/rooms",
       children: [
         {
           index: true,
           element: <Rooms />,
+        },
+        {
+          path: "*",
+          element: <Page404Screen />,
+        },
+      ],
+    },
+    {
+      path: "/roomsdetail",
+      children: [
+        {
+          index: true,
+          element: <RoomsDetail />,
         },
         {
           path: "*",
