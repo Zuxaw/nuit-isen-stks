@@ -47,7 +47,7 @@ const Header = () => {
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a>
+                  <a onClick={()=> navigate("/")}>
                     <i className="fas fa-home mr-5" />
                     Home
                   </a>
@@ -68,7 +68,7 @@ const Header = () => {
             )}
           </div>
           <div className="flex-1">
-            <a className="btn btn-ghost normal-case text-xl">
+            <a className="btn btn-ghost normal-case text-xl" onClick={()=> navigate("/")}>
               Sugar Hotel
               <i className="ml-2 fas fa-heart text-red-500" />
             </a>
