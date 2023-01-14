@@ -2,12 +2,7 @@ import { gql } from '@apollo/client';
 
 const getChambersQuery = gql`
   {
-    chambers {
-      number
-      typology
-      description
-      pricing
-    }
+    chambers
   }
 `;
 
