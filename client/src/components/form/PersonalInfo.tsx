@@ -7,12 +7,12 @@ function PersonalInfo() {
       <Header />
       <Step step={3} />
 
-      <div className="flex flex-col items-center mt-10 ">
+      <div className="flex flex-col items-center mt-8 ">
         <div className="flex flex-row">
           <div className="flex card w-96 bg-base-100 shadow-xl mr-5">
             <div className="card-body">
               <h2 className="card-title">Your information</h2>
-              <p className="text-error">All * are obligatory</p>
+              {/* <p className="text-error">All * are obligatory</p> */}
 
               <form>
                 <div className="form-control">
@@ -63,12 +63,12 @@ function PersonalInfo() {
                   </label>
                   <textarea
                     placeholder="..."
-                    className="input input-bordered textarea h-24"
+                    className="input input-bordered textarea h-20"
                   ></textarea>
                 </div>
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">
-                    Send Validate infromation
+                    Validate
                   </button>
                 </div>
               </form>
