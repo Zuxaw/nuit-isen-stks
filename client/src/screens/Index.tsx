@@ -8,7 +8,29 @@ import './index.scss';
 function Index() {
   const [adults, setAdults] = useState(0);
   const [rooms, setRooms] = useState(0);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const navigate = useNavigate();
+
+  // go to the rooms
+  const goToRooms = () => {
+    navigate('/rooms', {
+      state: {
+        adults,
+        rooms,
+        startDate,
+        endDate,
+      },
+    });
+  };
+
+  const handleDateChange = (dates: Date, type: string) => {
+    if (type === 'start') {
+      setStartDate(dates);
+    } else if (type === 'end') {
+      setEndDate(dates);
+    }
+  };
 
   const addItem = (type: string) => {
     if (type === 'adults') {
@@ -94,6 +116,7 @@ function Index() {
                           type="date"
                           className="input input-bordered border border-base-300 w-full"
                           placeholder="Select Date"
+                          onChange={(e) => handleDateChange(new Date(e.target.value), 'start')}
                         />
                       </div>
                       <div className="w-full">
@@ -104,6 +127,7 @@ function Index() {
                           type="date"
                           className="input input-bordered border border-base-300 w-full"
                           placeholder="Select Date"
+                          onChange={(e) => handleDateChange(new Date(e.target.value), 'end')}
                         />
                       </div>
                     </div>
@@ -175,7 +199,7 @@ function Index() {
               <button
                 type="button"
                 className="btn btn-primary normal-case min-w-60"
-                onClick={() => navigate('/rooms')}
+                onClick={goToRooms}
               >
                 Let's Go
               </button>

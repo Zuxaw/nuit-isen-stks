@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Step from "~/appkit/Step";
 import Header from "~/components/header/Header";
 
 const Rooms = () => {
   const navigate = useNavigate();
-
+  const { state } = useLocation();
+  console.log("state", state);
   // fake carte chamber hotel data
   const rooms = [
     {
