@@ -1,60 +1,59 @@
 import { gql } from '@apollo/client';
 
-const getUsersQuery = gql`
+const getChambersQuery = gql`
   {
-    users {
-      username
-      email
-      profilePicutre
+    chambers {
+      number
+      typology
+      description
+      pricing
     }
   }
 `;
 
-const getPostsQuery = gql`
-  {
-    posts {
-      content
-      images
+const addBookingMutation = gql`
+  mutation AddBooking(
+    $startDate: String!
+    $endDate: String!
+    $idChamber: String!
+    $countAdults: Int!
+    $idInvoice: String
+    $supplements: [String]
+    $idUser: String
+    $emailCustomer: String!
+    $nameCustomer: String
+    $surnameCustomer: String
+    $phoneNumber: String
+    $demands: String
+  ) {
+    addBooking(
+      startDate: $startDate
+      endDate: $endDate
+      idChamber: $idChamber
+      countAdults: $countAdults
+      idInvoice: $idInvoice
+      supplements: $supplements
+      idUser: $idUser
+      emailCustomer: $emailCustomer
+      nameCustomer: $nameCustomer
+      surnameCustomer: $surnameCustomer
+      phoneNumber: $phoneNumber
+      demands: $demands
+    ) {
+      startDate
+      endDate
+      idChamber
+      countAdults
+      idInvoice
+      supplements
+      idUser
+      emailCustomer
+      nameCustomer
+      surnameCustomer
+      phoneNumber
+      demands
     }
   }
 `;
 
-const addPostMutation = gql`
-  mutation AddBook($content: String!, $images: [String], $userId: String!) {
-    addBook(content: $name, images: $images, userId: $userId) {
-      _id
-      content
-    }
-  }
-`;
-
-const addUserMutation = gql`
-  mutation AddBook($email: String!,$uid: String!, $profilePicture: String, $username: String) {
-    addUser(email: $email,uid: $uid, profilePicture: $profilePicture, username: $username) {
-      _id
-      profilePicture
-      email
-      uid
-      username
-    }
-  }
-`;
-
-const getPostQuery = gql`
-  query GetPost($_id: String) {
-    book(_id: $_id) {
-      content
-      images
-      likes
-      shares
-      comments
-      createdAt
-      user {
-        username
-        profilePicture
-      }
-    }
-  }
-`;
-
-export { getPostQuery, getPostsQuery, getUsersQuery, addPostMutation, addUserMutation }
+export { getChambersQuery, addBookingMutation };
