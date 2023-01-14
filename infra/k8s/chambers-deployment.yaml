@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-deployment
+  name: chambers-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: posts
+      app: chambers
   template:
     metadata:
       labels:
-        app: posts
+        app: chambers
     spec:
       containers:
-        - name: posts
-          image: us.gcr.io/nuit-isen/posts
+        - name: chambers
+          image: us.gcr.io/nuit-isen/chambers
           env:
             - name: MONGO_URI
-              value: "mongodb://posts-mongo-service:27017/posts"
+              value: "mongodb://chambers-mongo-service:27017/chambers"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-service
+  name: chambers-service
 spec:
   selector:
-    app: posts
+    app: chambers
   ports:
-    - name: posts
+    - name: chambers
       protocol: TCP
       port: 4011
       targetPort: 4011

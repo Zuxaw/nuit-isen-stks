@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookings-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookings
+  template:
+    metadata:
+      labels:
+        app: bookings
+    spec:
+      containers:
+        - name: bookings
+          image: us.gcr.io/nuit-isen/bookings
+          env:
+            - name: MONGO_URI
+              value: "mongodb://bookings-mongo-service:27017/bookings"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookings-service
+spec:
+  selector:
+    app: bookings
+  ports:
+    - name: bookings
+      protocol: TCP
+      port: 4012
+      targetPort: 4012

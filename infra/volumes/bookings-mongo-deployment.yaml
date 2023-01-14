@@ -1,35 +1,35 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: posts-mongo-deployment
+  name: bookings-mongo-deployment
   labels:
-    app: posts-mongo
+    app: bookings-mongo
 spec:
   replicas: 1
-  serviceName: "posts-mongo"
+  serviceName: "bookings-mongo"
   selector:
     matchLabels:
-      app: posts-mongo
+      app: bookings-mongo
   template:
     metadata:
       labels:
-        app: posts-mongo
+        app: bookings-mongo
     spec:
       volumes:
-        - name: posts-mongo-storage
+        - name: bookings-mongo-storage
           persistentVolumeClaim:
-            claimName: posts-db-bs-claim
+            claimName: bookings-db-bs-claim
       containers:
-        - name: posts-mongo
+        - name: bookings-mongo
           image: mongo
           volumeMounts:
             - mountPath: "/data/db"
-              name: posts-mongo-storage
+              name: bookings-mongo-storage
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: posts-db-bs-claim
+  name: bookings-db-bs-claim
 spec:
   accessModes:
     - ReadWriteOnce
@@ -40,13 +40,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-mongo-service
+  name: bookings-mongo-service
 spec:
   type: ClusterIP
   selector:
-    app: posts-mongo
+    app: bookings-mongo
   ports:
-    - name: posts-db
+    - name: bookings-db
       protocol: TCP
       port: 27017
       targetPort: 27017

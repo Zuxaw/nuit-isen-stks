@@ -21,11 +21,16 @@ spec:
                 configMapKeyRef:
                   name: api-urls
                   key: API_USERS_URL
-            - name: API_POSTS_URL
+            - name: API_CHAMBERS_URL
               valueFrom:
                 configMapKeyRef:
                   name: api-urls
-                  key: API_POSTS_URL
+                  key: API_CHAMBERS_URL
+            - name: API_BOOKINGS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api-urls
+                  key: API_BOOKINGS_URL
 ---
 apiVersion: v1
 kind: Service

@@ -106,13 +106,16 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(parent, args) {
         console.log(args.userId);
-        const chamber = await axios.post((process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chamber/create', {
-          number: args.number,
-          typology: args.typology,
-          description: args.description,
-          pricing: args.pricing,
-          pictures: args.pictures,
-        });
+        const chamber = await axios.post(
+          (process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chamber/create',
+          {
+            number: args.number,
+            typology: args.typology,
+            description: args.description,
+            pricing: args.pricing,
+            pictures: args.pictures,
+          }
+        );
         return chamber.data;
       },
     },

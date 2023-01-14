@@ -43,12 +43,19 @@ build:
         manual:
           - src: "***/*.ts"
             dest: .
-    - image: us.gcr.io/nuit-isen/posts
-      context: backend/posts-service
+    - image: us.gcr.io/nuit-isen/chambers
+      context: backend/chambers-service
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "***/*.ts"
             dest: .
-
+    - image: us.gcr.io/nuit-isen/bookings
+      context: backend/booking-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "***/*.ts"
+            dest: .
