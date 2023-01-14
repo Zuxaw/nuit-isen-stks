@@ -3,6 +3,7 @@ import { gql } from '@apollo/client';
 const getChambersQuery = gql`
   {
     chambers {
+      _id
       number
       typology
       description
