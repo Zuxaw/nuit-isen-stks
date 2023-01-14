@@ -1,8 +1,9 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter, RouteObject, useRoutes } from "react-router-dom";
-import { isAuth } from "~/lib/firebase";
-import Dashboard from "../../screens/dashboard/dashboard";
-import PersonalInfo from "../form/PersonalInfo";
+import { lazy, Suspense } from 'react';
+import { RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
+import { isAuth } from '~/lib/firebase';
+import DashboardHeader from '../header/DashboardHeader';
+import Dashboard from '../../screens/dashboard/dashboard';
+import RedirectTo from './RedirectTo';
 
 const Loading = () => (
   <p className="p-4 w-full h-full text-center">Loading...</p>
