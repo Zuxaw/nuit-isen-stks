@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 interface ChamberAttrs {
   number: number;
   typology: string;
+  description?: string;
   pricing: number;
   pictures?: string[];
 }
@@ -14,6 +15,7 @@ interface ChamberModel extends mongoose.Model<ChamberDoc> {
 interface ChamberDoc extends mongoose.Document {
   number: number;
   typology: string;
+  description?: string;
   pricing: number;
   pictures?: string[];
 }
@@ -30,6 +32,7 @@ const chamberSchema = new mongoose.Schema(
       required: true,
       default: 'double',
     },
+    description: String,
     pricing: {
       type: Number,
       required: true,

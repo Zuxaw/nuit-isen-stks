@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/api/chamber/create', async (req: Request, res: Response) => {
     console.log(getTime() + 'POST: Post creation');
-    const { number, typology, pricing, pictures } = req.body;
+    const { number, typology, description, pricing, pictures } = req.body;
   
     if(!number || !typology || !pricing) {
       console.log(getTime() + 'Please specify the number, typology and pricing');
@@ -19,6 +19,7 @@ router.post('/api/chamber/create', async (req: Request, res: Response) => {
       {
         number,
         typology,
+        description,
         pricing,
         pictures,
       },
@@ -32,6 +33,7 @@ router.post('/api/chamber/create', async (req: Request, res: Response) => {
       const chamberCreated = Chamber.build({
         number,
         typology,
+        description,
         pricing,
         pictures,
       });

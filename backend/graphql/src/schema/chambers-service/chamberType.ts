@@ -7,6 +7,7 @@ export const chamberType: GraphQLObjectType = new GraphQLObjectType({
       _id: { type: GraphQLString },
       number: { type: GraphQLString },
       typology: { type: GraphQLString },
+      description: { type: GraphQLString },
       pricing: { type: GraphQLFloat },
       pictures: { type: new GraphQLList(GraphQLString) },
     }),

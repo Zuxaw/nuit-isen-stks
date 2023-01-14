@@ -73,6 +73,7 @@ const Mutation = new GraphQLObjectType({
       args: {
         number: { type: GraphQLInt },
         typology: { type: GraphQLString },
+        description: { type: GraphQLString },
         pricing: { type: GraphQLFloat },
         pictures: { type: new GraphQLList(GraphQLString) },
       },
@@ -81,6 +82,7 @@ const Mutation = new GraphQLObjectType({
         const post = await axios.post((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chamber/create', {
           number: args.number,
           typology: args.typology,
+          description: args.description,
           pricing: args.pricing,
           pictures: args.pictures,
         });
