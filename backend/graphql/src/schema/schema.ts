@@ -115,13 +115,19 @@ const Mutation = new GraphQLObjectType({
         const booking = await axios.post(
           (process.env.API_BOOKINGS_URL || 'http://localhost:4012') + '/api/booking/create',
           {
-            content: args.content,
-            images: args.images,
-            likes: args.likes,
-            shares: args.shares,
-            comments: args.comments,
-            createdAt: args.createdAt,
-            userId: args.userId,
+            startDate: args.startDate,
+            endDate: args.endDate,
+            idChamber: args.idChamber,
+            countAdults: args.countAdults,
+            countChildren: args.countChildren,
+            idInvoice: args.idInvoice,
+            supplements: args.supplements,
+            idUser: args.idUser,
+            emailCustomer: args.emailCustomer,
+            nameCustomer: args.nameCustomer,
+            surnameCustomer: args.surnameCustomer,
+            phoneNumber: args.phoneNumber,
+            demands: args.demands,
           }
         );
         return booking.data;
