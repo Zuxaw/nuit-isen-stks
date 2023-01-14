@@ -1,20 +1,36 @@
-import { Dialog } from '@headlessui/react';
-import { useRef, useState } from 'react';
-import { useAuthState } from '~/components/contexts/UserContext';
-import { SignInButton } from '~/components/domain/auth/SignInButton';
-import { SignOutButton } from '~/components/domain/auth/SignOutButton';
-import DashboardHeader from '~/components/header/Header';
-import Post from '~/components/Book';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TypeAnimation } from 'react-type-animation';
+import Header from '~/components/header/Header';
 import { Head } from '~/components/shared/Head';
 import './index.scss';
 
 function Index() {
+  const [adults, setAdults] = useState(0);
+  const [rooms, setRooms] = useState(0);
+  const navigate = useNavigate();
+
+  const addItem = (type: string) => {
+    if (type === 'adults') {
+      setAdults(adults + 1);
+    } else if (type === 'rooms') {
+      setRooms(rooms + 1);
+    }
+  };
+
+  const removeItem = (type: string) => {
+    if (type === 'adults' && adults > 0) {
+      setAdults(adults - 1);
+    } else if (type === 'rooms' && rooms > 0) {
+      setRooms(rooms - 1);
+    }
+  };
 
   return (
     <>
       <Head title="Home" />
       <div className="relative min-h-screen">
-        <DashboardHeader />
+        <Header />
         <div className="background">
           <span></span>
           <span></span>
@@ -37,17 +53,133 @@ function Index() {
           <span></span>
           <span></span>
         </div>
-        <div className="hero min-h-screen bg-base-200">
-          <div className="hero-content text-center">
-            <div className="max-w-md text-white">
-              <h1 className="text-5xl font-bold">Hello there</h1>
-              <p className="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In
-                deleniti eaque aut repudiandae et a id nisi.
-              </p>
-              <SignInButton />
+        <div className="min-h-screen bg-base-200 flex flex-col items-center">
+          <div className="text-center w-2/3 relative flex flex-col">
+            <div className="flex justify-center flex-col items-center font-semibold mt-24">
+              <h1 className="text-5xl text-neutral-content text-center pl-5 pr-5 pb-2">
+                Looking for a cosy nest ?
+              </h1>
+              <TypeAnimation
+                className="text-5xl text-center text-secondary"
+                cursor={true}
+                sequence={[
+                  'a rustic cell ⛓️?',
+                  4000,
+                  `a dungeon 🕸️?`,
+                  4000,
+                  `a classroom 📝?`,
+                  4000,
+                  `bdsm 🕯️?`,
+                  4000,
+                  `a hot room 🔥?`,
+                  4000,
+                  `some massages 😏?`,
+                  4000,
+                ]}
+                wrapper="h2"
+                repeat={Infinity}
+              />
             </div>
-            <Post />
+
+            <div className="rounded-2xl p-5 w-full mt-24 bg-base-100 shadow-xl border border-base-300">
+              <div className="h-40">
+                <div className="form-control">
+                  <div className="flex flex-row items-center">
+                    <div className="flex flex-row w-full">
+                      <div className="mr-2 w-full">
+                        <label className="label">
+                          <span className="label-text">Arrival Date</span>
+                        </label>
+                        <input
+                          type="date"
+                          className="input input-bordered border border-base-300 w-full"
+                          placeholder="Select Date"
+                        />
+                      </div>
+                      <div className="w-full">
+                        <label className="label">
+                          <span className="label-text">Departure Date</span>
+                        </label>
+                        <input
+                          type="date"
+                          className="input input-bordered border border-base-300 w-full"
+                          placeholder="Select Date"
+                        />
+                      </div>
+                    </div>
+                    <div className="dropdown dropdown-end w-full mt-9">
+                      <div
+                        tabIndex={0}
+                        className="flex justify-between items-center rounded-md border border-base-300 h-12 w-full m-1"
+                      >
+                        <div className="flex items-center">
+                          <i className="fa-solid fa-people-group m-5"></i>{' '}
+                          <div className="text-left">
+                            {rooms} Room {rooms > 1 ? 's' : ''}, {adults} Adult{' '}
+                            {adults > 1 ? 's' : ''}
+                          </div>
+                        </div>
+                        <i className="fa-solid fa-chevron-down m-5 flex-end" />
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content absolute menu p-2 shadow bg-base-100 rounded-box w-52"
+                      >
+                        <li>
+                          <a className="flex flex-row w-full justify-between">
+                            Rooms
+                            <div className="flex items-center">
+                              <button
+                                className="bg-gray-300 text-gray-800 rounded-md p-1"
+                                onClick={() => removeItem('rooms')}
+                              >
+                                <i className="fas fa-minus"></i>
+                              </button>
+                              <span className="px-2">{rooms}</span>
+                              <button
+                                className="bg-gray-300 text-gray-800 rounded-md p-1"
+                                onClick={() => addItem('rooms')}
+                              >
+                                <i className="fas fa-plus"></i>
+                              </button>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a className="flex flex-row w-full justify-between">
+                            Adults
+                            <div className="flex items-center">
+                              <button
+                                className="bg-gray-300 text-gray-800 rounded-md p-1"
+                                onClick={() => removeItem('adults')}
+                              >
+                                <i className="fas fa-minus"></i>
+                              </button>
+                              <span className="px-2">{adults}</span>
+                              <button
+                                className="bg-gray-300 text-gray-800 rounded-md p-1"
+                                onClick={() => addItem('adults')}
+                              >
+                                <i className="fas fa-plus"></i>
+                              </button>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="-mt-5">
+              <button
+                type="button"
+                className="btn btn-primary normal-case min-w-60"
+                onClick={() => navigate('/rooms')}
+              >
+                Let's Go
+              </button>
+            </div>
           </div>
         </div>
       </div>
