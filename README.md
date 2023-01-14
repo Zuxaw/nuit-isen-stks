@@ -1,4 +1,13 @@
 # nuit-isen-stks
+Subject: Hotel management and booking software
+Duration: 1 night
+
+Our solution => Sugar Hotel <3
+
+<img width="1494" alt="image" src="https://user-images.githubusercontent.com/82362374/212487763-1ea24eda-1f9a-4dbe-88ee-0526e2a6abe8.png">
+<img width="1490" alt="image" src="https://user-images.githubusercontent.com/82362374/212487780-7d5e3e44-e507-4ee3-ad73-2171c9c87f34.png">
+<img width="1493" alt="image" src="https://user-images.githubusercontent.com/82362374/212487810-f1ff88fb-cd9f-4cfc-9ea2-2c43773f9b64.png">
+<img width="1511" alt="image" src="https://user-images.githubusercontent.com/82362374/212487820-e86c37be-e519-43a6-aed0-48a859da35a9.png">
 
 
 ## Architecture:
