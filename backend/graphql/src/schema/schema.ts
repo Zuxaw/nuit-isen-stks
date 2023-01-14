@@ -1,19 +1,29 @@
 import axios from 'axios';
-import { GraphQLFloat, GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';
+import {
+  GraphQLInt,
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLString,
+} from 'graphql';
+import { bookingType } from './booking-service/bookingType';
 import { chamberType } from './chambers-service/chamberType';
 import { userType } from './users-service/userType';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    post: {
+    chamber: {
       type: chamberType,
       args: { _id: { type: GraphQLString } },
       async resolve(parent, args) {
-        const post = await axios.get(
-          (process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chamber/?_id=' + args._id
+        const chamber = await axios.get(
+          (process.env.API_CHAMBERS_URL || 'http://localhost:4011') +
+            '/api/chamber/?_id=' +
+            args._id
         );
-        return post.data;
+        return chamber.data;
       },
     },
     user: {
@@ -26,17 +36,30 @@ const RootQuery = new GraphQLObjectType({
         return user.data;
       },
     },
-    posts: {
+    chambers: {
       type: new GraphQLList(chamberType),
       async resolve(parent, args) {
-        const posts = await axios.get((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chambers');
-        return posts.data;
+        const chambers = await axios.get(
+          (process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chambers'
+        );
+        return chambers.data;
+      },
+    },
+    bookings: {
+      type: new GraphQLList(bookingType),
+      async resolve(parent, args) {
+        const bookings = await axios.get(
+          (process.env.API_BOOKINGS_URL || 'http://localhost:4012') + '/api/bookings'
+        );
+        return bookings.data;
       },
     },
     users: {
       type: new GraphQLList(userType),
       async resolve(parent, args) {
-        const users = await axios.get((process.env.API_USERS_URL || 'http://localhost:4010') + '/api/users');
+        const users = await axios.get(
+          (process.env.API_USERS_URL || 'http://localhost:4010') + '/api/users'
+        );
         return users.data;
       },
     },
@@ -57,34 +80,51 @@ const Mutation = new GraphQLObjectType({
         role: { type: new GraphQLNonNull(GraphQLString) },
       },
       async resolve(parent, args) {
-        const user = await axios.post((process.env.API_USERS_URL || 'http://localhost:4010') + '/api/user/create', {
-          uid: args.uid,
-          name: args.name,
-          surname: args.surname,
-          email: args.email,
-          phoneNumber: args.phoneNumber,
-          role: args.role,
-        });
+        const user = await axios.post(
+          (process.env.API_USERS_URL || 'http://localhost:4010') + '/api/user/create',
+          {
+            uid: args.uid,
+            name: args.name,
+            surname: args.surname,
+            email: args.email,
+            phoneNumber: args.phoneNumber,
+            role: args.role,
+          }
+        );
         return user.data;
       },
     },
-    addPost: {
-      type: chamberType,
+    addBooking: {
+      type: bookingType,
       args: {
-        number: { type: GraphQLInt },
-        typology: { type: GraphQLString },
-        pricing: { type: GraphQLFloat },
-        pictures: { type: new GraphQLList(GraphQLString) },
+        startDate: { type: GraphQLString },
+        endDate: { type: GraphQLString },
+        idChamber: { type: GraphQLString },
+        countAdults: { type: GraphQLInt },
+        countChildren: { type: GraphQLInt },
+        idInvoice: { type: GraphQLString },
+        supplements: { type: new GraphQLList(GraphQLString) },
+        idUser: { type: GraphQLString },
+        emailCustomer: { type: GraphQLString },
+        nameCustomer: { type: GraphQLString },
+        surnameCustomer: { type: GraphQLString },
+        phoneNumber: { type: GraphQLString },
+        demands: { type: GraphQLString },
       },
       async resolve(parent, args) {
-        console.log(args.userId);
-        const post = await axios.post((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chamber/create', {
-          number: args.number,
-          typology: args.typology,
-          pricing: args.pricing,
-          pictures: args.pictures,
-        });
-        return post.data;
+        const booking = await axios.post(
+          (process.env.API_BOOKINGS_URL || 'http://localhost:4012') + '/api/booking/create',
+          {
+            content: args.content,
+            images: args.images,
+            likes: args.likes,
+            shares: args.shares,
+            comments: args.comments,
+            createdAt: args.createdAt,
+            userId: args.userId,
+          }
+        );
+        return booking.data;
       },
     },
   },
