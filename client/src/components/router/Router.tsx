@@ -1,8 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, RouteObject, useRoutes } from 'react-router-dom';
 import { isAuth } from '~/lib/firebase';
-import Rooms from '~/screens/rooms/rooms';
-import Dashboard from '../../screens/dashboard/dashboard';
+import Rooms from '~/screens/rooms/Rooms';
 import PersonalInfo from '../form/PersonalInfo';
 
 const Loading = () => (
