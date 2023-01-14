@@ -7,6 +7,4 @@ function getTime(): string{
     return "["+hours+":"+minute+":"+sec+"] [Server INFO]: ";
 }
 
-
-
 export {getTime}
