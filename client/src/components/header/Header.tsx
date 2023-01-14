@@ -47,28 +47,40 @@ const Header = () => {
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a onClick={()=> navigate("/")}>
+                  <a onClick={() => navigate('/')}>
                     <i className="fas fa-home mr-5" />
                     Home
                   </a>
                 </li>
                 <li>
                   <a>
-                    <i className="fas fa-user mr-5" />
-                    Portfolio
+                    <i className="fas fa-user mr-6" />
+                    My room
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <i className="fa-solid fa-bed mr-5"></i>
+                    Beds & Rooms
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <i className="fa-solid fa-bars mr-6"></i>
+                    Special occasion
                   </a>
                 </li>
                 <li>
                   <a>
                     <i className="fas fa-envelope mr-5" />
-                    Messages
+                    Appointment
                   </a>
                 </li>
               </ul>
             )}
           </div>
           <div className="flex-1">
-            <a className="btn btn-ghost normal-case text-xl" onClick={()=> navigate("/")}>
+            <a className="btn btn-ghost normal-case text-xl" onClick={() => navigate('/')}>
               Sugar Hotel
               <i className="ml-2 fas fa-heart text-red-500" />
             </a>
