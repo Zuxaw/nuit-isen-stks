@@ -47,11 +47,7 @@ const Header = () => {
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-<<<<<<< HEAD
-                  <a onClick={() => navigate('/')}>
-=======
                   <a onClick={() => navigate("/")}>
->>>>>>> 339bb1f612621687d8c7f886e8a9908440d459dc
                     <i className="fas fa-home mr-5" />
                     Home
                   </a>
@@ -84,14 +80,10 @@ const Header = () => {
             )}
           </div>
           <div className="flex-1">
-<<<<<<< HEAD
-            <a className="btn btn-ghost normal-case text-xl" onClick={() => navigate('/')}>
-=======
             <a
               className="btn btn-ghost normal-case text-xl"
               onClick={() => navigate("/")}
             >
->>>>>>> 339bb1f612621687d8c7f886e8a9908440d459dc
               Sugar Hotel
               <i className="ml-2 fas fa-heart text-red-500" />
             </a>
