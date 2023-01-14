@@ -11,6 +11,8 @@ function Index() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const navigate = useNavigate();
+  const [isValide, setIsValide] = useState("");
+  
 
   // go to the rooms
   const goToRooms = () => {
@@ -117,6 +119,7 @@ function Index() {
                           className="input input-bordered border border-base-300 w-full"
                           placeholder="Select Date"
                           onChange={(e) => handleDateChange(new Date(e.target.value), 'start')}
+                          required
                         />
                       </div>
                       <div className="w-full">
@@ -128,6 +131,7 @@ function Index() {
                           className="input input-bordered border border-base-300 w-full"
                           placeholder="Select Date"
                           onChange={(e) => handleDateChange(new Date(e.target.value), 'end')}
+                          required
                         />
                       </div>
                     </div>

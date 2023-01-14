@@ -14,7 +14,7 @@ const RoomsDetail = () => {
       <Header />
       <div>
         <Step step={2} />
-        <div className="hero min-h-screen bg-base-300">
+        <div className="hero min-h-16 bg-base-300">
           <div className="hero-content flex-col lg:flex-row">
             {room.pictures && room.pictures.length > 0 ? (
               <img
