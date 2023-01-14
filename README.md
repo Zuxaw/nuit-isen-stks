@@ -1,6 +1,6 @@
 # nuit-isen-stks
-Subject: Hotel management and booking software
-Duration: 1 night
+- Subject: Hotel management and booking software
+- Duration: 1 night
 
 Our solution => Sugar Hotel <3
 
