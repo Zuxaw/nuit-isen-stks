@@ -53,7 +53,11 @@ const Rooms = () => {
           <div className="card w-96 bg-base-100 shadow-xl m-5" key={room.number}>
             <figure>
               {room.pictures && room.pictures.length > 0 ? (
-                <img src={room.pictures[Math.floor(Math.random() * room.pictures.length)]} />
+                <img
+                  className="h-64 w-full"
+                  style={{ objectFit: 'cover' }}
+                  src={room.pictures[Math.floor(Math.random() * room.pictures.length)]}
+                />
               ) : (
                 <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
               )}
