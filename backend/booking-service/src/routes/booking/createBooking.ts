@@ -11,7 +11,6 @@ router.post('/api/booking/create', async (req: Request, res: Response) => {
     endDate,
     idChamber,
     countAdults,
-    countChildren,
     idInvoice,
     supplements,
     idUser,
@@ -32,10 +31,6 @@ router.post('/api/booking/create', async (req: Request, res: Response) => {
       errors.push('an id for the chamber');
     case !countAdults:
       errors.push('the number of adults');
-    case !countChildren:
-      errors.push('the number of children');
-    case !idInvoice:
-      errors.push('an id for the invoice');
     case !emailCustomer:
       errors.push('the customer email');
   }
@@ -51,7 +46,6 @@ router.post('/api/booking/create', async (req: Request, res: Response) => {
     endDate,
     idChamber,
     countAdults,
-    countChildren,
     idInvoice,
     supplements,
     idUser,

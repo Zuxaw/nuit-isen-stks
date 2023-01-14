@@ -8,7 +8,6 @@ export const bookingType: GraphQLObjectType = new GraphQLObjectType({
     endDate: { type: GraphQLString },
     idChamber: { type: GraphQLString },
     countAdults: { type: GraphQLInt },
-    countChildren: { type: GraphQLInt },
     idInvoice: { type: GraphQLString },
     supplements: { type: new GraphQLList(GraphQLString) },
     idUser: { type: GraphQLString },

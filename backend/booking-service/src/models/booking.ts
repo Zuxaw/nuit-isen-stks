@@ -5,7 +5,6 @@ interface BookingAttrs {
   endDate: Date;
   idChamber: string;
   countAdults: number;
-  countChildren: number;
   idInvoice?: string;
   supplements?: string[];
   idUser?: string;
@@ -25,7 +24,6 @@ interface BookingDoc extends mongoose.Document {
   endDate: Date;
   idChamber: string;
   countAdults: number;
-  countChildren: number;
   idInvoice?: string;
   supplements?: string[];
   idUser?: string;
@@ -51,10 +49,6 @@ const BookingSchema = new mongoose.Schema(
       required: true,
     },
     countAdults: {
-      type: Number,
-      required: true,
-    },
-    countChildren: {
       type: Number,
       required: true,
     },
