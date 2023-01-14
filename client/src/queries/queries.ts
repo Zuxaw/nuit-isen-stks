@@ -8,6 +8,7 @@ const getChambersQuery = gql`
       typology
       description
       pricing
+      pictures
     }
   }
 `;
