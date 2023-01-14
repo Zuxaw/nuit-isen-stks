@@ -2,9 +2,8 @@ import { useQuery } from '@apollo/client';
 import Error from '~/appkit/Error';
 import Loading from '~/appkit/Loading';
 import TabsCard from '~/appkit/TabsCard';
-import Theme from '~/appkit/Theme';
-import DashboardHeader from '~/components/header/Header';
 import Post from '~/components/Book';
+import Header from '~/components/header/Header';
 import Postfield from '~/components/PostInput';
 import { getPostsQuery } from '~/queries/queries';
 
@@ -16,7 +15,7 @@ function Dashboard() {
   return (
     <>
       <div className="relative">
-        <DashboardHeader />
+        <Header />
         <div className="grid grid-cols-10">
           <div className="sm:col-span-2 ">{/* Left content goes here */}</div>
           <div className="sm:col-span-4 col-span-8 w-full mb-5">

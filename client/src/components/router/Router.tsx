@@ -1,9 +1,8 @@
 import { lazy, Suspense } from 'react';
-import { RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, RouteObject, useRoutes } from 'react-router-dom';
 import { isAuth } from '~/lib/firebase';
-import DashboardHeader from '../header/Header';
+import Rooms from '~/screens/rooms/rooms';
 import Dashboard from '../../screens/dashboard/dashboard';
-import RedirectTo from './RedirectTo';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
@@ -19,7 +18,7 @@ export const Router = () => {
 };
 
 const InnerRouter = () => {
-  const connected = isAuth()
+  const connected = isAuth();
   const routes: RouteObject[] = [
     {
       path: '/',
@@ -35,12 +34,11 @@ const InnerRouter = () => {
       ],
     },
     {
-      path: '/home',
-      // element: <DashboardHeader />,
+      path: '/rooms',
       children: [
         {
           index: true,
-          element: <Dashboard />,
+          element: <Rooms />,
         },
         {
           path: '*',

@@ -1,19 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
-import DashboardHeader from '~/components/header/Header';
+import Header from '~/components/header/Header';
 import { Head } from '~/components/shared/Head';
 import './index.scss';
 
 function Index() {
   const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(0);
+  const navigate = useNavigate();
 
   const addItem = (type: string) => {
     if (type === 'adults') {
       setAdults(adults + 1);
-    } else if (type === 'children') {
-      setChildren(children + 1);
     } else if (type === 'rooms') {
       setRooms(rooms + 1);
     }
@@ -22,8 +21,6 @@ function Index() {
   const removeItem = (type: string) => {
     if (type === 'adults' && adults > 0) {
       setAdults(adults - 1);
-    } else if (type === 'children' && children > 0) {
-      setChildren(children - 1);
     } else if (type === 'rooms' && rooms > 0) {
       setRooms(rooms - 1);
     }
@@ -33,7 +30,7 @@ function Index() {
     <>
       <Head title="Home" />
       <div className="relative min-h-screen">
-        <DashboardHeader />
+        <Header />
         <div className="background">
           <span></span>
           <span></span>
@@ -119,7 +116,7 @@ function Index() {
                           <i className="fa-solid fa-people-group m-5"></i>{' '}
                           <div className="text-left">
                             {rooms} Room {rooms > 1 ? 's' : ''}, {adults} Adult{' '}
-                            {adults > 1 ? 's' : ''}, {children} Child {children > 1 ? 'ren' : ''}
+                            {adults > 1 ? 's' : ''}
                           </div>
                         </div>
                         <i className="fa-solid fa-chevron-down m-5 flex-end" />
@@ -168,26 +165,6 @@ function Index() {
                             </div>
                           </a>
                         </li>
-                        <li>
-                          <a className="flex flex-row w-full justify-between">
-                            Children
-                            <div className="flex items-center">
-                              <button
-                                className="bg-gray-300 text-gray-800 rounded-md p-1"
-                                onClick={() => removeItem('children')}
-                              >
-                                <i className="fas fa-minus"></i>
-                              </button>
-                              <span className="px-2">{children}</span>
-                              <button
-                                className="bg-gray-300 text-gray-800 rounded-md p-1"
-                                onClick={() => addItem('children')}
-                              >
-                                <i className="fas fa-plus"></i>
-                              </button>
-                            </div>
-                          </a>
-                        </li>
                       </ul>
                     </div>
                   </div>
@@ -195,7 +172,11 @@ function Index() {
               </div>
             </div>
             <div className="-mt-5">
-              <button type="button" className="btn btn-primary normal-case min-w-60">
+              <button
+                type="button"
+                className="btn btn-primary normal-case min-w-60"
+                onClick={() => navigate('/rooms')}
+              >
                 Let's Go
               </button>
             </div>
