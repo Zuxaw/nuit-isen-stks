@@ -60,7 +60,7 @@ function PersonalInfo() {
                   <span className="label-text">Spécial request</span>
                 </label>
                 <input
-                  type="text"
+                  type="textarea"
                   placeholder="..."
                   className="input input-bordered"
                 />
