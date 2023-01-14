@@ -6,14 +6,14 @@ import { userType } from './users-service/userType';
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    post: {
+    chamber: {
       type: chamberType,
       args: { _id: { type: GraphQLString } },
       async resolve(parent, args) {
-        const post = await axios.get(
-          (process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chamber/?_id=' + args._id
+        const chamber = await axios.get(
+          (process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chamber/?_id=' + args._id
         );
-        return post.data;
+        return chamber.data;
       },
     },
     user: {
@@ -26,11 +26,11 @@ const RootQuery = new GraphQLObjectType({
         return user.data;
       },
     },
-    posts: {
+    chambers: {
       type: new GraphQLList(chamberType),
       async resolve(parent, args) {
-        const posts = await axios.get((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chambers');
-        return posts.data;
+        const chambers = await axios.get((process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chambers');
+        return chambers.data;
       },
     },
     users: {
@@ -68,7 +68,7 @@ const Mutation = new GraphQLObjectType({
         return user.data;
       },
     },
-    addPost: {
+    addChamber: {
       type: chamberType,
       args: {
         number: { type: GraphQLInt },
@@ -79,14 +79,14 @@ const Mutation = new GraphQLObjectType({
       },
       async resolve(parent, args) {
         console.log(args.userId);
-        const post = await axios.post((process.env.API_POSTS_URL || 'http://localhost:4011') + '/api/chamber/create', {
+        const chamber = await axios.post((process.env.API_CHAMBERS_URL || 'http://localhost:4011') + '/api/chamber/create', {
           number: args.number,
           typology: args.typology,
           description: args.description,
           pricing: args.pricing,
           pictures: args.pictures,
         });
-        return post.data;
+        return chamber.data;
       },
     },
   },
