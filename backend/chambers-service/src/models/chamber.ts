@@ -45,6 +45,6 @@ chamberSchema.statics.build = (attrs: ChamberAttrs) => {
   return new Chamber(attrs);
 };
 
-const Chamber = mongoose.model<ChamberDoc, ChamberModel>('Post', chamberSchema);
+const Chamber = mongoose.model<ChamberDoc, ChamberModel>('Chamber', chamberSchema);
 
 export { Chamber };
