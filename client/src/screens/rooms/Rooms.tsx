@@ -82,6 +82,12 @@ const Rooms = () => {
             </figure>
             <div className="card-body">
               <h2 className="card-title">{room.name}</h2>
+              <span>
+                <div className="badge">BDSM</div>
+                <div className="badge badge-primary">Intimate</div>
+                <div className="badge badge-secondary">Dragibus</div>
+                <div className="badge badge-accent">Cozy</div>
+              </span>
               <div className="card-actions justify-end">
                 <a onClick={() => navigate("/roomsdetail")}>
                   <button className="btn btn-primary">{room.price} €</button>
